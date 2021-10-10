@@ -3,7 +3,6 @@ package de.padurea.tsserverchat.utils;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,7 +12,7 @@ import java.util.Scanner;
 
 /**
  * 
- * @author ReZuNa
+ * @author Noel91x
  * 
  * @informations
  * CopyRight by Padurea.de,
@@ -51,7 +50,7 @@ public class FileManager {
 	
 	public void overwrite(String name, String value) throws IOException {
 		if (!getValueNames().contains(name)) {
-			FileWriter fw = new FileWriter(file, StandardCharsets.UTF_8, true);//Append
+			FileWriter fw = new FileWriter(file, true);//Append
 			fw.write(name + ": " + value + "\n");
 			fw.flush();
 			fw.close();
@@ -63,7 +62,7 @@ public class FileManager {
 					lines.set(i, name + ": " + value);
 					file.delete();
 					file.createNewFile();
-					Files.write(path, lines, StandardCharsets.UTF_8);
+					Files.write(path, lines);
 					break;
 				}
 			}
@@ -76,7 +75,7 @@ public class FileManager {
 		String currentLine = "";
 		
 		try {
-			scanner = new Scanner(file, StandardCharsets.UTF_8);
+			scanner = new Scanner(file);
 			
 			while (scanner.hasNextLine()) {
 				currentLine = scanner.nextLine();
@@ -101,7 +100,7 @@ public class FileManager {
 		Scanner scanner;
 		
 		try {
-			scanner = new Scanner(file, StandardCharsets.UTF_8);
+			scanner = new Scanner(file);
 			
 			while (scanner.hasNextLine()) {
 				list.add(scanner.nextLine().split(": ")[0]);
@@ -122,7 +121,7 @@ public class FileManager {
 			if (!file.exists()) {
 				return null;
 			}
-			scanner = new Scanner(file, StandardCharsets.UTF_8);
+			scanner = new Scanner(file);
 			
 			while (scanner.hasNextLine()) {
 				list.add(scanner.nextLine());
